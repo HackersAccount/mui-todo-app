@@ -1,5 +1,5 @@
 import {React, useState} from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Snackbar, Alert } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 /**
@@ -10,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
  */
 const TodoInput = ({addTodo}) => {
     const [text, setText] = useState('');
+    const [open, setOpen] = useState(false); 
     /**
      * Handles the form submission and adds a new todo if the text is valid
      * @param {Event} e - The form submission event
@@ -22,21 +23,36 @@ const TodoInput = ({addTodo}) => {
             addTodo({text, completed: false});
             // Reset the text input
             setText('');
+        } else{
+            setOpen(true);
         }      
     };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') return;
+        setOpen(false);
+    };
+
     return(
-        <form onSubmit={handleSubmit} style={{display: 'flex', marginBottom: 16}}>
-            <TextField
-                variant="outlined"
-                placeholder="Add a new task"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                fullWidth
-            />
-            <Button type="submit" color="primary" variant="contained" style={{marginLeft: 8}}>
-                <AddIcon />
-            </Button>
-        </form>
+       <>
+            <form onSubmit={handleSubmit} style={{display: 'flex', marginBottom: 16}}>
+                <TextField
+                    variant="outlined"
+                    placeholder="Add a new task"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    fullWidth
+                />
+                <Button type="submit" color="primary" variant="contained" style={{marginLeft: 8}}>
+                    <AddIcon />
+                </Button>
+            </form>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                Task cannot be empty!
+                </Alert>
+            </Snackbar>
+       </>
     )
 }
 
