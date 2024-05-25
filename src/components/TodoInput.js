@@ -22,7 +22,7 @@ const TodoInput = ({addTodo}) => {
             addTodo({text, completed: false});
             // Reset the text input
             setText('');
-        }
+        }      
     };
     return(
         <form onSubmit={handleSubmit} style={{display: 'flex', marginBottom: 16}}>

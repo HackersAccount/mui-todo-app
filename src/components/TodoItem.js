@@ -1,6 +1,6 @@
 import React from "react";
 import { ListItem, ListItemText, IconButton, Checkbox } from "@mui/material";
-import { DeleteIcon } from "@mui/icons-material/Delete";
+import { DeleteOutline } from "@mui/icons-material";
 
 
 const TodoItem = ({ todo, index, toggleTodo, deleteTodo }) => {
@@ -9,7 +9,7 @@ const TodoItem = ({ todo, index, toggleTodo, deleteTodo }) => {
             style={{textDecoration: todo.completed ? "line-through" : "none"}}
             secondaryAction={
                 <IconButton edge="end" aria-label="delete" onClick={() => deleteTodo(index)}>
-                    <DeleteIcon />
+                    <DeleteOutline />
                 </IconButton> 
             }
         >

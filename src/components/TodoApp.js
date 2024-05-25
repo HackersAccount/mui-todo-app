@@ -45,9 +45,9 @@ const TodoApp = () => {
         <Container maxWidth="sm">
             <Paper elevation={3} style={{padding: 16}}>
                 <Typography variant="h4" align="center" gutterBottom>
-                    TodoApp
+                    YTask Groqer
                 </Typography>
-                <TodoInput addNewTodo={addNewTodo} />
+                <TodoInput addTodo={addNewTodo} />
                 <TodoList todos={todos} toggleTodo={toggleTodoItem} deleteTodo={removeTodoItem} />
             </Paper>
         </Container>
