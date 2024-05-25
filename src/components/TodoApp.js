@@ -2,6 +2,7 @@ import {React, useState} from "react";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
 import { Container, Paper, Typography } from "@mui/material";
+import ConfirmDialog from "./ConfirmDialog";
 
 /**
  * Creates a TodoApp component that manages a list of todos.
@@ -10,6 +11,7 @@ import { Container, Paper, Typography } from "@mui/material";
  */
 const TodoApp = () => {
     const [todos, setTodos] = useState([]);
+    const [deleteIndex, setDeleteIndex] = useState(null);
 
     /**
      * Adds a new todo to the list of todos.
@@ -31,6 +33,10 @@ const TodoApp = () => {
         setTodos((prevTodos) => prevTodos.map((todo, i) => i === index ? {...todo, completed: !todo.completed} : todo));
     }
 
+    const confirmDeleteTask = (index) => {
+        setDeleteIndex(index);
+    };
+
     /**
      * Removes a todo item from the list of todos based on the provided index.
      *
@@ -38,7 +44,9 @@ const TodoApp = () => {
      * @return {void} This function does not return a value.
      */
     const removeTodoItem = (index) => {
-        setTodos((prevTodos) => prevTodos.filter((_, i) => i !== index));
+        const newTodos = todos.filter((_, i) => i !== deleteIndex);
+        setTodos(newTodos);
+        setDeleteIndex(null);
     };
 
     return (
@@ -48,8 +56,13 @@ const TodoApp = () => {
                     YTask Groqer
                 </Typography>
                 <TodoInput addTodo={addNewTodo} />
-                <TodoList todos={todos} toggleTodo={toggleTodoItem} deleteTodo={removeTodoItem} />
+                <TodoList todos={todos} toggleTodo={toggleTodoItem} confirmDelete={confirmDeleteTask} />
             </Paper>
+            <ConfirmDialog
+                open={deleteIndex !== null}
+                onClose={() => setDeleteIndex(null)}
+                onConfirm={removeTodoItem}
+            />
         </Container>
     );
 };
