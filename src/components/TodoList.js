@@ -2,7 +2,7 @@ import { List, Typography } from "@mui/material";
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({todos, toggleTodo, deleteTodo}) => {
+const TodoList = ({todos, toggleTodo, confirmDelete}) => {
     return(
         <>
             {todos.length === 0 ? (
@@ -15,7 +15,7 @@ const TodoList = ({todos, toggleTodo, deleteTodo}) => {
                             todo = {todo} 
                             index = {index} 
                             toggleTodo = {toggleTodo} 
-                            deleteTodo = {deleteTodo} 
+                            confirmDelete = {confirmDelete} 
                         />
                     ))}
                 </List>

@@ -33,7 +33,7 @@ const TodoApp = () => {
         setTodos((prevTodos) => prevTodos.map((todo, i) => i === index ? {...todo, completed: !todo.completed} : todo));
     }
 
-    const confirmDeleteTask = (index) => {
+    const confirmDelete = (index) => {
         setDeleteIndex(index);
     };
 
@@ -43,7 +43,7 @@ const TodoApp = () => {
      * @param {number} index - The index of the todo item to remove.
      * @return {void} This function does not return a value.
      */
-    const removeTodoItem = (index) => {
+    const removeTodoItem = () => {
         const newTodos = todos.filter((_, i) => i !== deleteIndex);
         setTodos(newTodos);
         setDeleteIndex(null);
@@ -56,7 +56,7 @@ const TodoApp = () => {
                     YTask Groqer
                 </Typography>
                 <TodoInput addTodo={addNewTodo} />
-                <TodoList todos={todos} toggleTodo={toggleTodoItem} confirmDelete={confirmDeleteTask} />
+                <TodoList todos={todos} toggleTodo={toggleTodoItem} confirmDelete={confirmDelete} />
             </Paper>
             <ConfirmDialog
                 open={deleteIndex !== null}
